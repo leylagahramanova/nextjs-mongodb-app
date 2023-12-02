@@ -1,4 +1,15 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {}
+module.exports = {
+  images: {
+    domains: [], // Empty array allows images from any domain (not recommended for security reasons)
+  },
+};
 
-module.exports = nextConfig
+// postcss.config.js
+module.exports = {
+  plugins: {
+    // Enable CSS Nesting plugin before Tailwind CSS
+    'postcss-nesting': {},
+    'tailwindcss': {},
+    'autoprefixer': {},
+  },
+};
