@@ -66,7 +66,7 @@ export default function Icons() {
            <div className="mid-container">
            <h2 className="w3-text-white" style={{ textAlign: "center", }}>Contacts</h2>
            {icons.map((icon) => (
-            <div className="">
+            <div className="" key={icon._id}>
               <div className="" style={{ alignItems: "center" }}>
                 <div className="" >
                   <div className="info-col"  >
