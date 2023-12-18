@@ -20,7 +20,9 @@ export default function EditHostPage() {
 
   const fetchHostData = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/host/${id}`);
+      const { data } = await axios.get('/api/getHostAndPort');
+          const { host, port } = data;
+      const response = await axios.get(`/api/host/${id}`);
       const { name, profession,image, description } = response.data.host; // Assuming the host object is under 'host' key
       setName(name || '');
       setProfession(profession || '');
@@ -38,9 +40,10 @@ export default function EditHostPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    const { data } = await axios.get('/api/getHostAndPort');
+    const { host, port } = data;
     try {
-      await axios.put(`http://localhost:3000/api/host/${id}`, {name,profession, description, image });
+      await axios.put(`/api/host/${id}`, {name,profession, description, image });
       handleClose();
     } catch (error) {
       console.error('Error updating host:', error);

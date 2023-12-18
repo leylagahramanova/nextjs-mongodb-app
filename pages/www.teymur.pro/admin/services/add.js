@@ -1,5 +1,5 @@
 // /pages/www.teymur.pro/admin/services/add.js
-import React, { useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import axios from 'axios';
 import { IconButton, Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField } from '@material-ui/core';
 import { useRouter } from 'next/router';
@@ -11,7 +11,7 @@ import { IoIosAddCircle } from "react-icons/io";
 import { AiTwotoneDelete } from "react-icons/ai";
 import { TiDelete } from "react-icons/ti";
 import { AiTwotoneEdit } from "react-icons/ai";
-export default function Services() {
+export default function Services({ scrollToIcons }) {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [image, setImage] = useState('');
@@ -23,20 +23,34 @@ export default function Services() {
     useEffect(() => {
         getServices();
     }, []);
+    const servicesSectionRef = useRef(null);
 
+    const handleIconsClick = () => {
+        scrollToIcons();
+    };
     const getServices = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/api/services');
-            setServices(response.data.services); // Adjust this line based on the actual structure of the response
+          const { data } = await axios.get('/api/getHostAndPort');
+          const { host, port } = data;
+      
+          // Use relative URL instead of constructing the full URL manually
+          const response = await axios.get(`/api/services`);
+          setServices(response.data.services);
         } catch (error) {
-            console.error('Error fetching services:', error);
+          console.error('Error fetching services:', error);
         }
-    };
-    const deleteService = async (id) => {
-        await axios.delete(`http://localhost:3000/api/service/${id}`);
-        getServices();
-    };
-
+      };
+      
+      const deleteService = async (id) => {
+        try {
+          const { data } = await axios.get('/api/getHostAndPort');
+          const { host, port } = data;
+          await axios.delete(`/api/service/${id}`);
+          getServices();
+        } catch (error) {
+          console.error('Error deleting service:', error);
+        }
+      };
     const handleOpenEdit = (_id) => {
         router.push(`/www.teymur.pro/admin/services/edit/${_id}`);
     };
@@ -58,51 +72,43 @@ export default function Services() {
     };
 
     return (
-        <div>
-              
-                <div className="onside" >
-                    <section className="container">
+        <>
+            <div className="onside" ref={servicesSectionRef} id="servicesSection"  >
+                <div className="sector">
+                    <section className="container" id="serverSection">
                         <div >
-                        <div >
-                                  <h2 className="w3-text-light-grey" style={{textAlign:"center"}}>Services</h2>
-                                  <br>
-                                </br> </div>
-                            <div className='App'>
+                            <h2 className="w3-text-light-grey" style={{ textAlign: "center" }}>Services</h2>
+                            <br></br>
+                            <div className='App scrollbar force-overflow' id='style-13'>
                                 {services.map((service) => (
                                     <div className="card" key={service._id}>
                                         <img src={service.image} alt={service.title} />
                                         <div className="overlay">
-                                            <Typography gutterBottom variant="h5" component="div">
+                                            <Typography gutterBottom variant="h5" component="div" style={{ textAlign: 'center' }}>
                                                 {service.title}
                                             </Typography>
-                                            <Typography className="description"variant="body2" color="GrayText" sx={{ maxHeight: '5rem',lineHeight: '1.5rem', flex: 1, fontSize: '1.5rem' }}>
-                                                {service.description}
+                                            <Typography className="description" variant="p" component="div" color="WhiteText" sx={{ maxHeight: '5rem', lineHeight: '1.5rem', flex: 1, fontSize: '1.5rem' }}>
+                                                &nbsp;{service.description}
                                             </Typography>
                                             <div className="buttons">
                                                 {isAdmin && (
                                                     <><IconButton color="inherit" onClick={() => handleOpenEdit(service._id)}>
-                                                    <AiTwotoneEdit />
-                                                 </IconButton>
-                                                 <IconButton  color="inherit" onClick={() => deleteService(service._id)}>
-                                                < AiTwotoneDelete/>
-                                                 </IconButton></>
-
+                                                        <AiTwotoneEdit />
+                                                    </IconButton>
+                                                        <IconButton color="inherit" onClick={() => deleteService(service._id)}>
+                                                            < AiTwotoneDelete />
+                                                        </IconButton></>
                                                 )}
                                             </div>
                                         </div>
-
                                     </div>
-
                                 ))}
-                            
                             </div>
-                            <br>
-                                </br>
-                                
+
                             {isAdmin && (
-                            <IconButton color="inherit" onClick={handleOpenAdd} >
-                            <IoIosAddCircle />
-                            </IconButton>
+                                <IconButton color="inherit" onClick={handleOpenAdd} >
+                                    <IoIosAddCircle />
+                                </IconButton>
                             )}
                             <Dialog open={open} onClose={handleClose}>
                                 <DialogTitle>Add Service</DialogTitle>
@@ -143,7 +149,19 @@ export default function Services() {
                             </Dialog>
                         </div>
                     </section>
+
+                    <div className='bott2' onClick={handleIconsClick}>
+                        <div className="indicator">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <br></br>
+                        {/* <h2>Contacts</h2> */}
+                    </div>
                 </div>
             </div>
-            );
+        </>
+
+    );
 }

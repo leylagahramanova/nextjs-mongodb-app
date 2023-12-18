@@ -19,7 +19,9 @@ export default function EditIconPage() {
 
   const fetchIconData = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/icon/${id}`);
+      const { data } = await axios.get('/api/getHostAndPort');
+          const { host, port } = data;
+      const response = await axios.get(`/api/icon/${id}`);
       const { link, image, phone, mail } = response.data.icon; // Assuming the icon object is under 'icon' key
       setLink(link || '');
       setImage(image || '');
@@ -39,7 +41,9 @@ export default function EditIconPage() {
     e.preventDefault();
 
     try {
-      await axios.put(`http://localhost:3000/api/icon/${id}`, { link, image });
+      const { data } = await axios.get('/api/getHostAndPort');
+          const { host, port } = data;
+      await axios.put(`/api/icon/${id}`, { link, image });
       handleClose();
     } catch (error) {
       console.error('Error updating icon:', error);

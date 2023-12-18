@@ -2,16 +2,57 @@
 @use 'tailwindcss/base';
 @use 'tailwindcss/components';
 @use 'tailwindcss/utilities';
+.head{
+  margin-bottom:250px;
+}
 
 .indicator
 {
-position: relative;
 width: 50px;
 height: 50px;
+display:flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
 transform: rotate(45deg);
+}
+
+.bottom{
+  position:absolute;
+  top:100vh;
+  transform:translateY(-100%);
+  width:100%;
+  display:flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+.bott{
+  display:flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+text-align:center
+}
+.bott2{
+  display:flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+text-align:center
 
 }
-.sector{
+.sect{
+  margin: 0;
+padding: 0;
+display: flex;
+animation: fadeIn 2s forwards;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+height: 100vh;
+}
+.sector2{
   margin: 0;
 padding: 0;
 display: flex;
@@ -19,12 +60,28 @@ animation: fadeIn 4s forwards;
 flex-direction: column;
 justify-content: center;
 align-items: center;
-height: 100vh;
-background: #000;
+
+}
+.sector3{
+  margin: 0;
+padding: 0;
+display: flex;
+animation: fadeIn 4s forwards;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+height: 12vh;
+}
+.centerarowconc{
+  display: flex;
+  flex-direction: column;
+justify-content: center;
+align-items: center;
 }
 .indicator span
 {animation: fadeIn 7s forwards;
 position: absolute;
+margin-top:5px;
 top: 0;
 left: 0;
 width: 100%;
@@ -65,12 +122,25 @@ border-color:#fff;
 20.1%, 100%{
 border-color:#222;}
 }
-.onside {
-  display: flex;
-  margin: 2rem auto;
-  animation: fadeIn 7s forwards;
- 
+@media screen and (max-width: 460px) {
+/* 
+
+  .onside {
+    height: auto;
+    margin: 35rem auto;
+  } */
 }
+@media screen and (min-width: 375px) {
+
+#host{
+  margin-bottom:200rem auto;
+}
+}
+
+p{
+  font-size:1rem;
+}
+
 
 .text {
   max-width: 75%; 
@@ -91,22 +161,44 @@ border-color:#222;}
    align-items: center;
    
 }
-@media screen and (max-width: 760px) {
-  .front {
-    padding: 10px;
+@media screen and (max-width: 380px) {
+  .mask{
+    width:220px;
   }
-}
-.front {
-  max-width: 90%;
-  padding: 15px;
 }
 
 @media screen and (max-width: 760px) {
+  /* .onside {
+    height: 100vh;
+    display: flex;
+    margin: 10rem auto;
+   
+  } */
   .onside {
-    flex-direction: column; /* Change to a column layout */
-    align-items: center; /* Center items */
-    animation: fadeIn 7s forwards;
+    height: auto;
+    margin: 5rem auto;
+  } 
+  .sector2{
+    margin: 0;
+  padding: 0;
+  display: flex;
+  animation: fadeIn 4s forwards;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 9vh;
+  background: #000;
   }
+  .front {
+    padding: 10px;
+  }
+
+  /* .onside {
+    height:100vh;
+    flex-direction: column; 
+    align-items: center; 
+    margin: 20rem auto;
+  } */
 
   .text {
     max-width: 100%; 
@@ -115,7 +207,6 @@ border-color:#222;}
 
   .photo {
     float:none;
-    max-width: 100%; 
   }
 
   .icon-card {
@@ -185,7 +276,7 @@ height:200vh;
 
 section {
   padding: 0 clamp(1rem, 3vw, 5rem);
-  display: grid;
+  display: flex;
   place-content: center;
 
   p {
@@ -194,9 +285,18 @@ section {
 }
 
 h1{font-size:4.5rem;}
+h2{
+  font-size:2.5rem;
+}
+h3{
+  font-size:1.5rem;
+}
 @media screen and (max-width: 500px){
 h1{
-  font-size:2.5rem;
+  font-size:3.5rem;
+}
+h2{
+  font-size:2rem;
 }
 }
 
@@ -209,9 +309,8 @@ h1{
     )
     rgb(var(--background-start-rgb));
 }
-h1{
-  font-size:2.5e
-}
+
+
 body, h1,h2,h3,h4,h5,h6 {
   font-family:   "Roboto", sans-serif;
 }
@@ -222,62 +321,166 @@ body, h1,h2,h3,h4,h5,h6 {
   width: 120px;background: #222;
 }
 .App {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  gap: 20px;
+  display: grid;
+  grid-template-rows:repeat(2,auto);
+  grid-auto-columns: repeat(auto);
+  grid-auto-flow:column dense;
+  justify-content: space-evenly;
+  gap: 10px;
+  align-items: stretch;
   
 }
 .card {position: relative;
   border-radius: 10px;
   overflow: hidden;
+
+  max-width:300px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s;
   box-shadow: 0 10px 20px black;
 }
 .card img {
+  width:100%;
   border-radius: 10px;
-  height: 215px;
-  width: 350px;
+  height: 200px;
   overflow: hidden;
   object-fit: cover;
 }
-@media screen and (max-width: 950px){
-  .t{
-    margin-left:100px;
-  }
+
+@media screen and (max-width: 1000px){
+
   .App {
     display: flex;
+    justify-content: space-evenly;
     flex-wrap: wrap;
-    justify-content: space-around;
-    gap: 20px;
     
-  }
-  .card {position: relative;
-    border-radius: 10px;
-    overflow: hidden;
-    width: 300px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
-    box-shadow: 0 10px 20px black;
-  }
-  .card img {
+  }    .scrollbar
+  {
+    float: left;
     height: 200px;
-    object-fit: cover;
+    overflow-y: scroll;
+    margin-bottom: 25px;
   }
+  
+  .force-overflow
+  {
+    min-height: 450px;
+  }
+         #style-13::-webkit-scrollbar-track
+  {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.9);
+    border-radius: 10px;
+    background-color: #CCCCCC;
+  }
+  #style-13::-webkit-scrollbar
+  {
+    width: 12px;
+  }
+  #style-13::-webkit-scrollbar-thumb
+  {
+    border-radius: 10px;
+    background-color: #e6e6e6;
+    background-image: -webkit-linear-gradient(90deg,
+                          transparent,
+                          rgba(0, 0, 0, 0.4) 50%,
+                          transparent,
+                          transparent)
+  }
+  .card {position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+   width: 260px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    box-shadow: 0 10px 20px black;
+  }
+  .card img {
+    height: 170px;
+    object-fit: cover;
+  }     
 }
 
-@media screen and (max-width: 700px){
-  .t{
-    margin-left:100px;
-  }
+@media screen and (max-width: 600px){
   .App {
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-around;
-    gap: 15px;
+    flex-wrap: wrap;
+  }   
+  .card {position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 260px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    box-shadow: 0 10px 20px black;
+  }   
+}
+@media screen and (max-width: 700px){
+
+  .App {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
     
+  } 
+  .card {position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 280px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    box-shadow: 0 10px 20px black;
   }
+  .card img {
+    height: 170px;
+    object-fit: cover;
+  }     
+}
+@media screen and (max-width: 577px){
+  .card {position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 240px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    box-shadow: 0 10px 20px black;
+  }
+}
+/* @media screen and (max-width: 556px){
+  .card {position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    max-width: 230px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    box-shadow: 0 10px 20px black;
+  }
+} */
+@media screen and (max-width: 545px){
+  .card {position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 230px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    box-shadow: 0 10px 20px black;
+  }
+}
+@media screen and (max-width: 535px){
+  .card {position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 220px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    box-shadow: 0 10px 20px black;
+  }
+    .card img {
+    height: 170px;
+    object-fit: cover;
+  }    
+}
+@media screen and (max-width: 500px){
   .card {position: relative;
     border-radius: 10px;
     overflow: hidden;
@@ -286,12 +489,11 @@ body, h1,h2,h3,h4,h5,h6 {
     transition: transform 0.3s;
     box-shadow: 0 10px 20px black;
   }
-  .card img {
+    .card img {
+    height: 180px;
     object-fit: cover;
-  }
+  }    
 }
-
-
 .overlay {
   position: absolute;
   bottom: -100%;
@@ -302,7 +504,6 @@ body, h1,h2,h3,h4,h5,h6 {
   color: #fff;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
   transition: bottom 0.3s;
 }
@@ -321,30 +522,37 @@ body, h1,h2,h3,h4,h5,h6 {
     justify-contente:space-around;
     width: 100%;
   }
+/* 
+    .onside {
+      height: auto;
+      margin: 35rem auto;
+    } */
 }
 
 .overlay .description {
-  margin: 8px 0 0;
+  margin: 8px ;
   font-size: 1.2rem;
-  font-weight: bold;
 } 
 
-.App {
-  text-align: center;
-  display: flex;
-  flex-wrap: wrap;
-  align-content: flex-start;
-  justify-content: center;
 
-
-}
 
 .container {
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-}
 
+}
+.container1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+.container2 {
+  height: 100vh;
+
+}
 
 .contact-info{
   width: 40%;
@@ -386,12 +594,7 @@ body, h1,h2,h3,h4,h5,h6 {
 	padding: 0 15px;gap:20px;
 }
 
-
-@media(max-width: 574px) {
-	.footer-col {
-		width: 100%;
-	}
-}.footer-wave-svg {
+.footer-wave-svg {
   background-color: transparent;
   display: block;
   height: 80px;
@@ -408,7 +611,10 @@ body, h1,h2,h3,h4,h5,h6 {
   justify-content:space-between;
   width:40%;
 }
+
 .mid-container{
+  height: 100vh;
+  color:#cccccc;
   display: flex;
   position:relative;
   flex-direction: column;
@@ -416,6 +622,15 @@ body, h1,h2,h3,h4,h5,h6 {
   align-items: center;
   align-content: center;
 }
+.info-col{
+  margin-top:5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: center;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -441,3 +656,185 @@ body, h1,h2,h3,h4,h5,h6 {
     margin-top: 0;
 }
 
+
+/* Styles for the side menu */
+.side-menu {
+  
+animation: fadeIn 6s forwards;
+  width:14em;
+  height: auto;
+  margin:4em auto 0;
+  font-size: 1em;
+  line-height: 2em;
+  color: #fff;
+  font-weight:700;
+  position:fixed;
+  top:0; 
+  bottom:0;
+  left: -10em;
+}
+.side-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.side-menu ul li {
+display:block;
+  background-color: #333;
+  height: 2em;
+  padding: 1em 1.5em;
+  position: relative;
+  -webkit-transition: -webkit-transform 0.5s,     background-color .5s, color .5s;
+  transition: transform .5s, background-color .5s, color .5s;
+}
+/*the colors of the different columns*/
+.side-menu ul li:nth-child(1) { background-color: #00aced;}
+.side-menu ul li:nth-child(2) { background-color: #3b5998;}
+
+.side-menu ul li:hover {
+  background-color: #339966; 
+  -webkit-transform: translateX(10em);
+  transform: translateX(10em);
+}
+.side-menu ul li a {
+display:block;
+  color: #FFF;
+  text-decoration: none;
+}
+.side-menu ul li span {
+  display:block;
+  position: absolute;
+  font-size:1em;
+  line-height: 1em;
+  height:1em;
+  top:0; 
+  bottom:0;
+  margin:0 auto;
+  padding:1em 1.5em;
+  right: 0.16666666666667em;
+  color: #F8F6FF;
+}
+
+.scroll-container {
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  scroll-padding-top: 1px; /* Add padding to prevent overscroll */
+}
+
+.sector {
+  scroll-snap-align: center;
+  height: 100vh; /* Set explicit height for smoother snapping */
+}
+
+.sector {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  animation-duration: 2s;flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+@keyframes shine {
+  0% {
+    background-position: 0;
+  }
+  90% {
+    background-position: 600px;
+  }
+  100% {
+    background-position: 600px;
+  }
+}
+.Ap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+
+
+.log {
+  width: 600px;
+  background-color: #404040;
+  padding: 20px;
+  border-radius: 10px;
+  border-top: 4px solid #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input {
+  padding: 10px;
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid #ccc;
+  color: #fff;
+  transition: box-shadow 0.3s;
+}
+
+input:focus {
+  box-shadow: 0 0 10px #19d4ca;
+}
+
+.button {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+}
+
+.login-button,
+.register-link {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s, color 0.3s;
+  text-decoration: none;
+}
+
+.login-button {
+  background-color: transparent;
+  color: #bfbfbf;
+}
+
+.login-button:hover {
+  background-color: #e6e6e6;
+  color: #fff;
+  box-shadow: none;
+}
+
+.login-button:active {
+  box-shadow: 0 0 10px #19d4ca;
+}
+
+.register-link {
+  color: #ccc;
+  background-color: transparent;
+}
+
+.register-link:hover {
+  color: #fff;
+}
+
+.register-link:active {
+  box-shadow: 0 0 10px #ccc;
+}
+
+@media (max-width: 480px) {
+  .log {
+    width: 100%;
+    max-width: 300px;
+  }
+}

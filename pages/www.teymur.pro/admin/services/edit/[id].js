@@ -20,7 +20,9 @@ export default function EditHostPage() {
 
   const fetchHostData = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/service/${id}`);
+      const { data } = await axios.get('/api/getHostAndPort');
+          const { host, port } = data;
+      const response = await axios.get(`/api/service/${id}`);
       const { title, image, description } = response.data.service; // Assuming the service object is under 'service' key
       setTitle(title || '');
       setImage(image || '');
@@ -39,7 +41,9 @@ export default function EditHostPage() {
     e.preventDefault();
 
     try {
-      await axios.put(`http://localhost:3000/api/service/${id}`, {title, description, image });
+      const { data } = await axios.get('/api/getHostAndPort');
+          const { host, port } = data;
+      await axios.put(`/api/service/${id}`, {title, description, image });
       handleClose();
     } catch (error) {
       console.error('Error updating service:', error);

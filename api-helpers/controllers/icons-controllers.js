@@ -1,6 +1,5 @@
 // /api-helpers/controllers/icons-controllers
 import Icon from "../model/Icon";
-const linkWords=["teymur_gahramanov@outlook.com"];
 export const getAllIcons = async (req, res) => {
   let icons;
   try {
@@ -18,30 +17,17 @@ export const getAllIcons = async (req, res) => {
   };
   export async function createIconById(req, res) {
     const { link, image, mail, phone } = req.body;
-    const mailWithLinks = linkWords.reduce((prevMail, word) => {
-      const regex = new RegExp(`\\b${word}\\b`, "gi");
-      return prevMail.replace(
-        regex,
-        `<a href="/link/${word}">${word}</a>`
-      );
-    }, mail);if (
-      !link || link.trim() === "" ||
-      !image || image.trim() === ""||
-      !mail|| mail.trim() === ""||
-      !phone|| phone.trim() === ""
-    ) {
-      return res.status(422).json({ message: "Invalid Inputs" });
-    }
-    let newIcon=new Icon({
-link, image, mail, phone
-    })
+  
+    // Create the icon with the available data
+    let icon;
     try {
-   const savedIcon=await newIcon.save();
+      icon = new Icon({ link, image, mail, phone });
+      icon = await icon.save();
+      return res.status(201).json({ icon });
     } catch (err) {
       console.error(err);
       return res.status(500).json({ message: "Internal Server Error" });
     }
-    return res.status(201).json({ icon:savedIcon });
   }
   export async function updateIcon(req, res) {
     const id=req.query.id;
